@@ -1,7 +1,8 @@
 ctest
 =====
 
-Small unit test framework for C, inspired by this post of Eric Radman: http://eradman.com/posts/tdd-in-c.html
+Small unit test framework for C hacked together while coding C, inspired by 
+<a href="http://eradman.com/posts/tdd-in-c.html">this post</a> by Eric Radman.
 
 Featuring colorful and descriptive error messages! :)
 
@@ -31,7 +32,7 @@ Run the testsuite by passing a function reference to the test suite runner macro
 
 Assert macros
 -------------
-A list of the currently available assertions
+The currently available assertions is:
 * ASSERT_TRUE(test)
 * ASSERT_FALSE(test)
 * ASSERT_EQUAL_INT(actual, expected)
@@ -41,4 +42,3 @@ A list of the currently available assertions
 * ASSERT_EQUAL_STRING(actual, expected)
 * ASSERT_NOT_EQUAL_STRING(actual, expected)
 * ASSERT_CONTAINS_STRING(string, find)
-
