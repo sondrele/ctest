@@ -1,7 +1,4 @@
-#
-# Variables to control the various tools
-# CFLAGS go to cc
-#
+
 INCLUDEPATH=\
     -Iinclude\
     -I/usr/local/include

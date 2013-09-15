@@ -31,6 +31,13 @@ void ctest_generate_report(int passed, const char *error_message, const char *fu
 }
 
 /* ASSERTIONS */
+void assert_same(int passed, void *ptr_1, void *ptr_2, const char *func, int line) {
+    int diff = (long)ptr_2 - (long)ptr_1;
+    diff = diff >= 0 ? diff : -diff;
+    sprintf(error_message, "%4$sExpected %5$s%1$p%4$s to be equal to %5$s%2$p%4$s, they differ by %5$s%3$d%4$s bytes", ptr_1, ptr_2, diff, RED_COLOR, CYAN_COLOR);
+    ctest_generate_report(passed, error_message, func, line);
+}
+
 void assert_true(int passed, const char *func, int line) {
     sprintf(error_message, "%sExpected %strue", RED_COLOR, CYAN_COLOR);
     ctest_generate_report(passed, error_message, func, line);
@@ -117,11 +124,11 @@ int run_testsuite(void (*test_suite)(void)) {
     float diff = (((float)end - (float)start) / CLOCKS_PER_SEC) * 1000;
 
     printf("==========================================================================\n");
-    printf("# ctest: RUNNING %s\n", test_suite_name);
+    printf("# ctest: %sRUNNING %s%s\n", FAT_COLOR, test_suite_name, STD_COLOR);
     printf("--------------------------------------------------------------------------\n");
     printf("%s", test_report);
     printf("--------------------------------------------------------------------------\n");
-    printf("# ctest: %d tests finished in: %fms\n", num_tests, diff);
+    printf("# ctest: %s%d tests finished in: %fms%s\n", FAT_COLOR, num_tests, diff, STD_COLOR);
     if (num_tests_passed) {
         printf("# ctest: %sPASSED TESTS (%d)%s", GREEN_COLOR, num_tests_passed, STD_COLOR);
         printf(", %sPASSED ASSERTIONS (%d)%s\n", GREEN_COLOR, num_assertions_passed, STD_COLOR);

@@ -15,6 +15,7 @@
 * Colors applied to stdio
 ***************************************/
 #define STD_COLOR               "\033[0;37m"
+#define FAT_COLOR               "\033[1;37m"
 #define RED_COLOR               "\033[1;31m"
 #define GREEN_COLOR             "\033[1;32m"
 #define BLUE_COLOR              "\033[0;34m"
@@ -43,6 +44,8 @@
 * ASSERT MACROS
 * Calls the appropriate function with information about testcase and line 
 ***************************************/
+#define ASSERT_SAME(ptr_1, ptr_2) do { assert_same((ptr_1 == ptr_2), ptr_1, ptr_2, __func__, __LINE__); } while (0)
+
 #define ASSERT_TRUE(test) do { assert_true((test), __func__, __LINE__); } while (0)
 #define ASSERT_FALSE(test) do { assert_false(!(test), __func__, __LINE__); } while (0)
 
@@ -69,6 +72,8 @@ void ctest_assertion_passed(const char *func);
 void generate_report(int passed, const char *message, const char *func, int line);
 
 /* Assert functions, these should only be called through the macros */
+void assert_same(int passed, void *ptr_1, void *ptr_2, const char *func, int line);
+
 void assert_true(int passed, const char *func, int line);
 void assert_false(int passed, const char *func, int line);
 

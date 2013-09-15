@@ -68,16 +68,36 @@ void false_string_assertions() {
     ASSERT_CONTAINS_STRING(c, a);
 }
 
+void false_pointer_assertions() {
+    int *a = NULL,
+        *b = (int *) malloc(sizeof(int)),
+        *c = (int *) malloc(sizeof(int));
+    ASSERT_SAME(a, b);
+    ASSERT_SAME(a, c);
+    ASSERT_SAME(b, c);
+}
+
+void true_pointer_assertions() {
+    int *a = NULL,
+        *b = (int *) malloc(sizeof(int)),
+        *c = b;
+    ASSERT_SAME(a, 0);
+    ASSERT_SAME(b, c);
+    ASSERT_SAME(b, b);
+}
+
 void all_assertions_false() {
     TEST_CASE(false_integers_assertions);
     TEST_CASE(false_float_assertions);
     TEST_CASE(false_string_assertions);
+    TEST_CASE(false_pointer_assertions);
 }
 
 void all_assertions_true() {
     TEST_CASE(true_integer_assertions);
     TEST_CASE(true_float_assertions);
     TEST_CASE(true_string_assertions);
+    TEST_CASE(true_pointer_assertions);
 }
 
 int main() {
